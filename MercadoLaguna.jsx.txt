@@ -1,0 +1,179 @@
+import { useState } from "react";
+
+const categories = [
+  '🍔 Comida',
+  '🛠 Servicios',
+  '🚗 Autos',
+  '📱 Electrónica',
+  '👕 Ropa',
+  '🏪 Negocios Locales',
+];
+
+const businesses = [
+  { name: 'Taquería El Centro', cat: 'Comida' },
+  { name: 'AutoFix Laguna', cat: 'Servicio Automotriz' },
+  { name: 'Boutique Luna', cat: 'Ropa' },
+];
+
+const trustItems = [
+  '✓ Negocios verificados',
+  '📲 Contacto por WhatsApp',
+  '📸 Fotos reales',
+  '📍 Mercado local',
+];
+
+export default function MercadoLagunaPreview() {
+  const [clicked, setClicked] = useState(null);
+
+  const handleClick = (label) => {
+    setClicked(label);
+    setTimeout(() => setClicked(null), 1500);
+  };
+
+  return (
+    <div className='min-h-screen bg-white text-slate-900'>
+      {clicked && (
+        <div className='fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-green-700 text-white px-6 py-2 rounded-full shadow-lg font-semibold text-sm'>
+          ✓ {clicked}
+        </div>
+      )}
+
+      {/* Hero */}
+      <section className='relative overflow-hidden bg-gradient-to-br from-green-900 via-green-700 to-green-400 text-white'>
+        <div
+          className='absolute inset-0 bg-cover bg-center opacity-10'
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000)' }}
+        />
+        <div className='relative mx-auto max-w-7xl px-6 py-16 text-center'>
+          <div className='mb-6 flex justify-center'>
+            <div className='rounded-[2rem] border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-md'>
+              <div className='text-4xl font-black tracking-wide'>
+                MERCADO <span className='text-green-200'>LAGUNA</span>
+              </div>
+              <p className='text-sm text-green-100'>Tu mercado local digital</p>
+            </div>
+          </div>
+
+          <h1 className='mx-auto max-w-4xl text-4xl font-black leading-tight md:text-6xl'>
+            Compra, vende y encuentra negocios locales en un solo lugar
+          </h1>
+
+          <p className='mx-auto mt-5 max-w-2xl text-lg text-green-50'>
+            Productos, servicios y negocios de tu ciudad. Rápido, seguro y conectado con La Laguna.
+          </p>
+
+          <div className='mt-8 flex flex-wrap justify-center gap-4'>
+            <button
+              className='rounded-2xl bg-white px-8 py-4 font-bold text-green-800 shadow-lg hover:bg-green-50 transition-colors'
+              onClick={() => handleClick('Buscar productos')}
+              type='button'
+            >
+              Buscar productos
+            </button>
+            <button
+              className='rounded-2xl bg-green-500 px-8 py-4 font-bold text-white shadow-lg hover:bg-green-400 transition-colors'
+              onClick={() => handleClick('Publicar negocio')}
+              type='button'
+            >
+              Publicar negocio
+            </button>
+            <button
+              className='rounded-2xl border border-white px-8 py-4 font-bold text-white hover:bg-white/10 transition-colors'
+              onClick={() => handleClick('WhatsApp')}
+              type='button'
+            >
+              WhatsApp
+            </button>
+          </div>
+
+          <div className='mt-10 inline-flex rounded-full border border-white/20 bg-white/15 px-6 py-3 backdrop-blur-md'>
+            <span className='font-semibold'>🔥 25+ negocios locales ya registrados</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust badges */}
+      <section className='mx-auto max-w-7xl px-6 py-12'>
+        <div className='grid gap-5 md:grid-cols-4'>
+          {trustItems.map((item) => (
+            <div
+              key={item}
+              className='rounded-[2rem] border bg-slate-50 p-6 text-center font-semibold shadow-sm'
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className='mx-auto max-w-7xl px-6 py-6'>
+        <h2 className='mb-6 text-center text-3xl font-black'>Explora Categorías</h2>
+        <div className='grid grid-cols-2 gap-5 md:grid-cols-3'>
+          {categories.map((category) => (
+            <div
+              key={category}
+              className='cursor-pointer rounded-[2rem] border bg-white p-8 text-center text-xl font-bold shadow-sm transition-all hover:shadow-lg hover:border-green-400'
+              onClick={() => handleClick(category)}
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured businesses */}
+      <section className='mx-auto max-w-7xl px-6 py-14'>
+        <div className='mb-6 flex items-center justify-between'>
+          <h2 className='text-3xl font-black'>Negocios Destacados</h2>
+          <button
+            className='font-bold text-green-700 hover:text-green-500'
+            onClick={() => handleClick('Ver todos')}
+            type='button'
+          >
+            Ver todos →
+          </button>
+        </div>
+
+        <div className='grid gap-8 md:grid-cols-3'>
+          {businesses.map((business) => (
+            <div
+              key={business.name}
+              className='overflow-hidden rounded-[2rem] border bg-white shadow-md transition-all hover:shadow-xl'
+            >
+              <div className='h-48 bg-gradient-to-br from-green-700 to-green-300' />
+              <div className='p-6'>
+                <div className='text-xl font-black'>{business.name}</div>
+                <div className='mt-1 text-sm text-slate-500'>{business.cat}</div>
+                <div className='mt-3 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-800'>
+                  ✓ Negocio Local Verificado
+                </div>
+                <button
+                  className='mt-5 w-full rounded-2xl bg-green-700 py-4 font-bold text-white hover:bg-green-800 transition-colors'
+                  onClick={() => handleClick(`WhatsApp - ${business.name}`)}
+                  type='button'
+                >
+                  Hablar por WhatsApp
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className='mt-16 bg-slate-950 text-white'>
+        <div className='mx-auto flex max-w-7xl flex-col justify-between gap-8 px-6 py-12 md:flex-row'>
+          <div>
+            <div className='text-2xl font-black'>MERCADO LAGUNA</div>
+            <p className='mt-2 text-slate-400'>Tu mercado local digital.</p>
+          </div>
+          <div>
+            <div className='mb-2 font-semibold'>Síguenos</div>
+            <div className='text-slate-300'>Facebook • Instagram • TikTok • WhatsApp</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
